@@ -77,62 +77,58 @@ margin-top:15px;
 font-weight:bold;
 font-size:18px;
 }
-
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>Krzysztof Lesniewski</h1>
+<h1>Krzysztof Lesniewski 🌎</h1>
 <h1>Dlaczego warto uczyć się języków obcych</h1>
-<p>Mały projekt o nauce języków oraz ich znaczeniu w dzisiejszym świecie</p>
+<p>Mały projekt o nauce języków oraz ich znaczeniu w dzisiejszym świecie 📚</p>
 </header>
 
 <section id="about">
 <h2>Krótko o mnie</h2>
 <div class="card">
-<p>Mam 14 lat i uczę się języków obcych. Mój główny język to angielski, dodatkowo uczę się hiszpańskiego i języka migowego.</p>
+<p>Mam 14 lat i uczę się języków obcych. Mój główny język to angielski 🇬🇧, dodatkowo uczę się hiszpańskiego 🇪🇸 i języka migowego 🤟.</p>
 </div>
 </section>
 
 <section id="why">
 <h2>Dlaczego warto się uczyć języków</h2>
 <div class="card">
-<p>Znajomość języków obcych pozwala komunikować się z ludźmi z całego świata, poznawać kultury i zdobywać wiedzę dostępną tylko w innych językach.</p>
-<p>Uczenie się języków poprawia pamięć, koncentrację i logiczne myślenie. Może również pomóc w przyszłej pracy lub podróżach.</p>
+<p>Znajomość języków pozwala komunikować się z ludźmi z całego świata 🌍, poznawać kultury i zdobywać wiedzę dostępną tylko w innych językach.</p>
+<p>Uczenie się języków poprawia pamięć 🧠, koncentrację i logiczne myślenie. Może również pomóc w przyszłej pracy lub podróżach ✈️.</p>
 </div>
 </section>
 
 <section id="facts">
 <h2>Ciekawostki o językach</h2>
 <div class="card">
-<p><b>Angielski:</b> Jest językiem międzynarodowym internetu, nauki i technologii. Ponad 1,5 miliarda ludzi zna go w jakimś stopniu.</p>
-<p><b>Hiszpański:</b> Drugi najczęściej używany język w kontaktach międzynarodowych. Ma ponad 460 milionów rodzimych użytkowników.</p>
-<p><b>Inne ciekawostki:</b> Na świecie istnieje ponad 7000 języków, a uczenie się nowych rozwija mózg i umiejętność przyswajania informacji.</p>
+<p><b>Angielski 🇬🇧:</b> Jest językiem międzynarodowym internetu, nauki i technologii. Ponad 1,5 miliarda ludzi zna go w jakimś stopniu.</p>
+<p><b>Hiszpański 🇪🇸:</b> Drugi najczęściej używany język w kontaktach międzynarodowych. Ma ponad 460 milionów rodzimych użytkowników.</p>
+<p><b>Inne ciekawostki 🌐:</b> Na świecie istnieje ponad 7000 języków, a uczenie się nowych rozwija mózg i umiejętność przyswajania informacji.</p>
 </div>
 </section>
 
-<section id="game">
-<h2>Mini gra po angielsku</h2>
+<section id="minigame">
+<h2>Minigame 🎮</h2>
 <div class="card">
-<p>Guess the English word for the image:</p>
+<p>Guess the English word or sentence for the image/description:</p>
 <img id="game-img" src="" alt="Guess the word">
-<div>
-<button onclick="checkAnswer('dog')">Dog</button>
-<button onclick="checkAnswer('cat')">Cat</button>
-<button onclick="checkAnswer('bird')">Bird</button>
-</div>
+<div id="game-buttons"></div>
 <p id="result"></p>
+<p id="progress"></p>
 </div>
 </section>
 
 <footer>
-Projekt szkolny – Nauka języków obcych
+SP9 Projekt szkolny – Nauka języków obcych 📖
 </footer>
 
 <script>
-// Animacja pojawiania się sekcji
+// Animacja sekcji
 function revealSections(){
 const sections = document.querySelectorAll('section');
 sections.forEach(sec=>{
@@ -144,27 +140,91 @@ sec.classList.add('visible');
 window.addEventListener('scroll', revealSections);
 window.addEventListener('load', revealSections);
 
-// Mini gra
-const gameWords = [
+// Dane do gry: pierwsze 10 to łatwe słowa, kolejne 20 to zdania B2
+const gameItems = [
 {img:"https://upload.wikimedia.org/wikipedia/commons/6/6e/Golde33443.jpg", word:"dog"},
 {img:"https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg", word:"cat"},
-{img:"https://upload.wikimedia.org/wikipedia/commons/1/12/Bird_on_a_tree.jpg", word:"bird"}
+{img:"https://upload.wikimedia.org/wikipedia/commons/1/12/Bird_on_a_tree.jpg", word:"bird"},
+{img:"https://upload.wikimedia.org/wikipedia/commons/4/47/Apple.jpg", word:"apple"},
+{img:"https://upload.wikimedia.org/wikipedia/commons/a/a8/Banana-Single.jpg", word:"banana"},
+{img:"https://upload.wikimedia.org/wikipedia/commons/5/5a/Orange-Fruit-Pieces.jpg", word:"orange"},
+{img:"https://upload.wikimedia.org/wikipedia/commons/e/e0/Grapes.jpg", word:"grape"},
+{img:"https://upload.wikimedia.org/wikipedia/commons/2/24/Strawberry.jpg", word:"strawberry"},
+{img:"https://upload.wikimedia.org/wikipedia/commons/1/15/Carrot.jpg", word:"carrot"},
+{img:"https://upload.wikimedia.org/wikipedia/commons/3/36/Tomato.jpg", word:"tomato"},
+// 20 pytań B2 – zdania do dopasowania (nie obrazki)
+{img:"", word:"I like to eat apples", description:"I like to eat apples"},
+{img:"", word:"She is reading a book", description:"She is reading a book"},
+{img:"", word:"They are playing football", description:"They are playing football"},
+{img:"", word:"He is cooking dinner", description:"He is cooking dinner"},
+{img:"", word:"We are going to the park", description:"We are going to the park"},
+{img:"", word:"The cat is sleeping on the sofa", description:"The cat is sleeping on the sofa"},
+{img:"", word:"I am learning Spanish", description:"I am learning Spanish"},
+{img:"", word:"She can speak three languages", description:"She can speak three languages"},
+{img:"", word:"He is writing a letter", description:"He is writing a letter"},
+{img:"", word:"They are watching a movie", description:"They are watching a movie"},
+{img:"", word:"We went shopping yesterday", description:"We went shopping yesterday"},
+{img:"", word:"I have two brothers", description:"I have two brothers"},
+{img:"", word:"She likes chocolate", description:"She likes chocolate"},
+{img:"", word:"He goes to school by bus", description:"He goes to school by bus"},
+{img:"", word:"They are eating dinner", description:"They are eating dinner"},
+{img:"", word:"I am going to study English", description:"I am going to study English"},
+{img:"", word:"She is drinking water", description:"She is drinking water"},
+{img:"", word:"He is riding a bicycle", description:"He is riding a bicycle"},
+{img:"", word:"We are listening to music", description:"We are listening to music"},
+{img:"", word:"They are talking on the phone", description:"They are talking on the phone"}
 ];
+
 let current = 0;
-function showWord(){
-document.getElementById('game-img').src = gameWords[current].img;
-document.getElementById('result').innerText="";
+let correct = 0;
+
+function showItem(){
+const imgEl = document.getElementById('game-img');
+const btnDiv = document.getElementById('game-buttons');
+const options = [gameItems[current].word];
+while(options.length < 3){
+let rand = gameItems[Math.floor(Math.random()*gameItems.length)].word;
+if(!options.includes(rand)) options.push(rand);
 }
-function checkAnswer(ans){
-if(ans === gameWords[current].word){
-document.getElementById('result').innerText="Correct!";
+options.sort(()=>Math.random()-0.5);
+
+if(gameItems[current].img){
+imgEl.src = gameItems[current].img;
+imgEl.style.display='block';
 }else{
-document.getElementById('result').innerText="Try again!";
+imgEl.style.display='none';
 }
-current = (current + 1) % gameWords.length;
-showWord();
+
+btnDiv.innerHTML = '';
+options.forEach(opt=>{
+let btn = document.createElement('button');
+btn.innerText = opt;
+btn.onclick = ()=>checkAnswer(opt);
+btnDiv.appendChild(btn);
+});
+document.getElementById('result').innerText = '';
+document.getElementById('progress').innerText = `Question ${current+1}/30`;
 }
-showWord();
+
+function checkAnswer(ans){
+if(ans === gameItems[current].word){
+correct++;
+document.getElementById('result').innerText = '✅ Correct!';
+}else{
+document.getElementById('result').innerText = '❌ Try again!';
+}
+current++;
+if(current>=30){
+document.getElementById('game-img').style.display='none';
+document.getElementById('game-buttons').style.display='none';
+document.getElementById('progress').innerText='';
+document.getElementById('result').innerText = `Game over! Your score: ${Math.round(correct/30*100)}% 🎉`;
+}else{
+showItem();
+}
+}
+
+showItem();
 </script>
 
 </body>
