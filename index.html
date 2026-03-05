@@ -6,13 +6,13 @@
 <title>Dlaczego warto uczyć się języków</title>
 
 <style>
-
 body{
 font-family: Arial, sans-serif;
 margin:0;
-background:linear-gradient(180deg,#020617,#0f172a,#1e1b4b);
+background: linear-gradient(180deg,#020617,#0f172a,#1e1b4b);
 color:white;
 text-align:center;
+overflow-x:hidden;
 }
 
 header{
@@ -20,15 +20,21 @@ padding:60px 20px;
 background:linear-gradient(90deg,#1e3a8a,#4c1d95);
 }
 
-h1{
-font-size:42px;
-margin-bottom:10px;
-}
+h1{ font-size:42px;margin-bottom:10px;}
+h2{margin-top:0;}
 
 section{
 max-width:900px;
 margin:auto;
 padding:50px 20px;
+opacity:0;
+transform: translateY(50px);
+transition: all 1s ease-out;
+}
+
+section.visible{
+opacity:1;
+transform: translateY(0);
 }
 
 .card{
@@ -51,20 +57,25 @@ cursor:pointer;
 margin-top:10px;
 }
 
-button:hover{
-opacity:0.85;
-}
-
-#slowo{
-font-size:22px;
-margin-top:20px;
-}
+button:hover{opacity:0.85;}
 
 footer{
 margin-top:40px;
 padding:20px;
 background:#020617;
 font-size:14px;
+}
+
+#game img{
+width:150px;
+height:150px;
+margin-bottom:15px;
+}
+
+#result{
+margin-top:15px;
+font-weight:bold;
+font-size:18px;
 }
 
 </style>
@@ -77,127 +88,82 @@ font-size:14px;
 <p>Mały projekt o nauce języków oraz ich znaczeniu w dzisiejszym świecie</p>
 </header>
 
-
-<section>
-
+<section id="about">
 <h2>Krótko o mnie</h2>
-
 <div class="card">
-
-<p>
-Mam 14 lat i również uczę się języków obcych.
-</p>
-
-<p>
-Moim głównym językiem do nauki jest angielski. Dodatkowo uczę się podstaw hiszpańskiego oraz języka migowego.
-</p>
-
-<p>
-Na razie znam tylko kilka słów, ale traktuję to jako początek dalszej nauki.
-</p>
-
+<p>Mam 14 lat i uczę się języków obcych. Mój główny język to angielski, dodatkowo uczę się hiszpańskiego i języka migowego.</p>
 </div>
-
 </section>
 
-
-<section>
-
-<h2>Dlaczego warto uczyć się języków</h2>
-
+<section id="why">
+<h2>Dlaczego warto się uczyć języków</h2>
 <div class="card">
-
-<p>
-Znajomość języków obcych jest dziś jedną z najważniejszych umiejętności. Dzięki nim możemy komunikować się z ludźmi z różnych krajów, poznawać inne kultury oraz zdobywać nowe doświadczenia.
-</p>
-
-<p>
-W internecie ogromna część wiedzy dostępna jest w języku angielskim. Znając język można korzystać z kursów, artykułów, filmów i materiałów edukacyjnych z całego świata.
-</p>
-
-<p>
-Uczenie się języków rozwija również mózg. Poprawia pamięć, koncentrację oraz zdolność logicznego myślenia.
-</p>
-
-<p>
-Języki są także bardzo przydatne podczas podróży. Dzięki nim można łatwiej porozumiewać się z ludźmi w innych krajach.
-</p>
-
-<p>
-W przyszłości znajomość języków może pomóc w pracy, ponieważ wiele firm działa międzynarodowo i potrzebuje osób, które potrafią komunikować się z ludźmi z różnych części świata.
-</p>
-
+<p>Znajomość języków obcych pozwala komunikować się z ludźmi z całego świata, poznawać kultury i zdobywać wiedzę dostępną tylko w innych językach.</p>
+<p>Uczenie się języków poprawia pamięć, koncentrację i logiczne myślenie. Może również pomóc w przyszłej pracy lub podróżach.</p>
 </div>
-
 </section>
 
-
-<section>
-
-<h2>Losowe słowo</h2>
-
-<div class="card">
-
-<p>Kliknij przycisk aby wylosować słowo w języku angielskim lub hiszpańskim.</p>
-
-<button onclick="losujSlowo()">Losuj słowo</button>
-
-<p id="slowo"></p>
-
-</div>
-
-</section>
-
-
-<section>
-
+<section id="facts">
 <h2>Ciekawostki o językach</h2>
-
 <div class="card">
-
-<p>
-Na świecie istnieje ponad 7000 języków. Najczęściej używanymi językami są chiński, angielski oraz hiszpański.
-</p>
-
-<p>
-Angielski jest obecnie jednym z najważniejszych języków w internecie, technologii i nauce.
-</p>
-
-<p>
-Uczenie się języków jest procesem długim, ale bardzo rozwijającym i pozwala lepiej rozumieć inne kultury.
-</p>
-
+<p><b>Angielski:</b> Jest językiem międzynarodowym internetu, nauki i technologii. Ponad 1,5 miliarda ludzi zna go w jakimś stopniu.</p>
+<p><b>Hiszpański:</b> Drugi najczęściej używany język w kontaktach międzynarodowych. Ma ponad 460 milionów rodzimych użytkowników.</p>
+<p><b>Inne ciekawostki:</b> Na świecie istnieje ponad 7000 języków, a uczenie się nowych rozwija mózg i umiejętność przyswajania informacji.</p>
 </div>
-
 </section>
 
+<section id="game">
+<h2>Mini gra po angielsku</h2>
+<div class="card">
+<p>Guess the English word for the image:</p>
+<img id="game-img" src="" alt="Guess the word">
+<div>
+<button onclick="checkAnswer('dog')">Dog</button>
+<button onclick="checkAnswer('cat')">Cat</button>
+<button onclick="checkAnswer('bird')">Bird</button>
+</div>
+<p id="result"></p>
+</div>
+</section>
 
 <footer>
-
 Projekt szkolny – Nauka języków obcych
-
 </footer>
 
-
 <script>
-
-function losujSlowo(){
-
-const slowa = [
-"Hello – cześć",
-"Thank you – dziękuję",
-"Learn – uczyć się",
-"Language – język",
-"Hola – cześć (hiszpański)",
-"Gracias – dziękuję (hiszpański)"
-]
-
-const los = slowa[Math.floor(Math.random()*slowa.length)]
-
-document.getElementById("slowo").innerText = los
-
+// Animacja pojawiania się sekcji
+function revealSections(){
+const sections = document.querySelectorAll('section');
+sections.forEach(sec=>{
+if(sec.getBoundingClientRect().top < window.innerHeight - 100){
+sec.classList.add('visible');
 }
+});
+}
+window.addEventListener('scroll', revealSections);
+window.addEventListener('load', revealSections);
 
+// Mini gra
+const gameWords = [
+{img:"https://upload.wikimedia.org/wikipedia/commons/6/6e/Golde33443.jpg", word:"dog"},
+{img:"https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg", word:"cat"},
+{img:"https://upload.wikimedia.org/wikipedia/commons/1/12/Bird_on_a_tree.jpg", word:"bird"}
+];
+let current = 0;
+function showWord(){
+document.getElementById('game-img').src = gameWords[current].img;
+document.getElementById('result').innerText="";
+}
+function checkAnswer(ans){
+if(ans === gameWords[current].word){
+document.getElementById('result').innerText="Correct!";
+}else{
+document.getElementById('result').innerText="Try again!";
+}
+current = (current + 1) % gameWords.length;
+showWord();
+}
+showWord();
 </script>
 
 </body>
